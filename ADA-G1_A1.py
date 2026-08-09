@@ -82,8 +82,11 @@ submission = pd.read_csv("./data/submission.csv")
 submission["Y"] = test_predictions
 submission.to_csv("./data/submission_final.csv", index=False)
 
+submission_path = os.path.abspath("./data/submission_final.csv")
+
+
 api.competition_submit(
-    file_name="./data/submission_final.csv",
+    file_name=submission_path,
     message="submission_Assign1",
     competition=COMPETITION_ID
 )
