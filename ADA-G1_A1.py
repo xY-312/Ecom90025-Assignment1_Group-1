@@ -87,7 +87,3 @@ api.competition_submit(
     message="submission_Assign1",
     competition=COMPETITION_ID
 )
-
-subs = api.competition_submissions(COMPETITION_ID)
-for s in subs:
-    print(vars(s))
