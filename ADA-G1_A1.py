@@ -25,8 +25,8 @@ os.remove(zip_filepath)
 print(f"Files extracted successfully to '{DESTINATION_PATH}' directory.")
 
 # Read data
-train = pd.read_csv("train_data.csv")
-test = pd.read_csv("test_data.csv")
+train = pd.read_csv("./data/train_data.csv")
+test = pd.read_csv("./data/test_data.csv")
 
 # report the correlations between all explanatory variables with the dependent variable
 correlations = (
@@ -78,12 +78,12 @@ test_predictions = model.predict(test[['X34']])
 
 
 # save the predictions to a CSV file
-submission = pd.read_csv("submission.csv")
+submission = pd.read_csv("./data/submission.csv")
 submission["Y"] = test_predictions
-submission.to_csv("submission_final.csv", index=False)
+submission.to_csv("./data/submission_final.csv", index=False)
 
 api.competition_submit(
-    file_name="./submission_final.csv",
+    file_name="./data/submission_final.csv",
     message="submission_Assign1",
     competition=COMPETITION_ID
 )
@@ -91,9 +91,3 @@ api.competition_submit(
 subs = api.competition_submissions(COMPETITION_ID)
 for s in subs:
     print(vars(s))
-
-
-# save the predictions to a CSV file
-submission = pd.read_csv("submission.csv")
-submission["Y"] = test_predictions
-submission.to_csv("submission_final.csv", index=False)
