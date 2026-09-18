@@ -28,7 +28,7 @@ os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(SUBMISSIONS_DIR, exist_ok=True)
 
 # Authenticate Kaggle API
-api_key = "KGAT_07005328f6852bee7a8b908d496828d2"
+api_key = "KGAT_dfb2861ddbb89d04113f225bb28951a3"
 os.makedirs(os.path.expanduser("~/.kaggle"), exist_ok=True)
 with open(os.path.expanduser("~/.kaggle/kaggle.json"), "w") as f:
     f.write('{"username":"student","key":"' + api_key + '"}')
@@ -316,7 +316,40 @@ pd.DataFrame({'ID': test['ID'], 'Y': pred_7}).to_csv(SUBMISSIONS_DIR / "submissi
 
 
 # =====================================================================
-# Part 6: Additional Requirements
+# Part 6: Submission to Kaggle
 # =====================================================================
-print("\nAll submission files have been successfully generated.")
-print("所有 submission 文件已生成")
+print("\n===== Part 6: Submission to Kaggle =====")
+try:
+    print("Submitting Model 12 (5-Model Averaging) to Kaggle API...")
+    api.competition_submit(
+        file_name=str(SUBMISSIONS_DIR / "submission_5model_avg.csv"),
+        message="Model 12: 5-Model Averaging",
+        competition=COMPETITION_ID
+    )
+    print("Model 12 Kaggle submission successful.")
+except Exception as e:
+    print(f"Model 12 Kaggle API Submission failed: {e}")
+
+try:
+    print("Submitting Model 13 (5-Model OLS Stacking) to Kaggle API...")
+    api.competition_submit(
+        file_name=str(SUBMISSIONS_DIR / "submission_5model_ols_stack.csv"),
+        message="Model 13: 5-Model OLS Stacking",
+        competition=COMPETITION_ID
+    )
+    print("Model 13 Kaggle submission successful.")
+except Exception as e:
+    print(f"Model 13 Kaggle API Submission failed: {e}")
+
+try:
+    print("Submitting Model 14 (5-Model Ridge Stacking) to Kaggle API...")
+    api.competition_submit(
+        file_name=str(SUBMISSIONS_DIR / "submission_5model_ridge_stack.csv"),
+        message="Model 14: 5-Model Ridge Stacking",
+        competition=COMPETITION_ID
+    )
+    print("Model 14 Kaggle submission successful.")
+except Exception as e:
+    print(f"Model 14 Kaggle API Submission failed: {e}")
+
+print("\nAll submission files have been successfully generated and submitted.")
